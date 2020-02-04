@@ -36,6 +36,7 @@ class SextansApiController extends AbstractController
      */
     public function ShowAllContactsAction(Request $request)
     {
+        header("Access-Control-Allow-Origin: *");
         $em = $this->getDoctrine()->getManager();
          $query = $em->createQuery('SELECT m 
                   FROM App:Contacts m
@@ -45,8 +46,8 @@ class SextansApiController extends AbstractController
          $responseArray = array();
         foreach($contacts as $obj){
             $responseArray[] = array(
-                "userid" => $obj->getId(),
-                "fullname" => $obj->getFullname(),
+                "id" => $obj->getId(),
+                "name" => $obj->getFullname(),
                 "username" => $obj->getUsername(),
                 "email" => $obj->getEmail(),
                 "phone" => $obj->getPhone(),
